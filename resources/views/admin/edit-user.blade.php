@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4>✏️ Edit User</h4>
+        <h4> Edit User</h4>
         <a href="{{ route('admin.users') }}" class="btn btn-secondary btn-sm">
             <i class="fas fa-arrow-left me-1"></i> Back
         </a>
@@ -63,10 +63,10 @@
                         <option value="">Select Role</option>
                         @foreach($roles as $role)
                             <option value="{{ $role->id }}" {{ old('role_id', $user->role_id) == $role->id ? 'selected' : '' }}>
-                                @if($role->id == 1) 🎓 Student
-                                @elseif($role->id == 2) 👨‍🏫 Lecturer
-                                @elseif($role->id == 3) 📚 Librarian
-                                @elseif($role->id == 4) ⚙️ Admin
+                                @if($role->id == 1)  Student
+                                @elseif($role->id == 2)  Lecturer
+                                @elseif($role->id == 3)  Librarian
+                                @elseif($role->id == 4)  Admin
                                 @endif
                             </option>
                         @endforeach

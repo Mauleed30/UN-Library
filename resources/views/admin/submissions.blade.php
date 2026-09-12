@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4>📋 Manage Submissions</h4>
+        <h4>Manage Submissions</h4>
         <span class="text-muted" style="font-size: 0.85rem;">
             <i class="fas fa-file-alt me-1"></i> Total: {{ $submissions->total() }}
         </span>

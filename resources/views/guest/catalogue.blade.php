@@ -393,7 +393,7 @@
     <div class="container">
         <div class="hero-content">
             <h1 class="hero-title">
-                📚 <span>Public</span> Catalogue
+                <span>Public</span> Catalogue
             </h1>
             <p class="hero-subtitle">
                 Discover academic submissions, theses, dissertations and research papers
@@ -404,7 +404,7 @@
             <form method="GET" action="{{ route('guest.catalogue') }}" class="search-box">
                 <div class="input-group">
                     <input type="text" name="search" class="form-control"
-                           placeholder="Search by title, author, or keywords..."
+                           placeholder="Search by title, author or keywords..."
                            value="{{ request('search') }}">
                     <button type="submit" class="btn-search">
                         <i class="fas fa-search me-2"></i> Search
@@ -416,15 +416,15 @@
             <div class="stats-bar">
                 <div class="stat-item">
                     <div class="number">{{ \App\Models\Submission::where('status', 'published')->count() }}</div>
-                    <div class="label">📄 Published Works</div>
+                    <div class="label">Published Works</div>
                 </div>
                 <div class="stat-item">
                     <div class="number">{{ \App\Models\Submission::where('status', 'published')->where('is_open_source', true)->count() }}</div>
-                    <div class="label">🔓 Open Access</div>
+                    <div class="label">Open Access</div>
                 </div>
                 <div class="stat-item">
                     <div class="number">{{ \App\Models\Category::count() }}</div>
-                    <div class="label">📂 Categories</div>
+                    <div class="label">Categories</div>
                 </div>
             </div>
         </div>
@@ -478,9 +478,9 @@
                                 <i class="fas fa-tag me-1"></i> {{ $submission->category->name ?? 'Uncategorized' }}
                             </span>
                             @if($submission->is_open_source)
-                                <span class="badge-access open">🔓 Open Access</span>
+                                <span class="badge-access open">Open Access</span>
                             @else
-                                <span class="badge-access restricted">🔒 Restricted</span>
+                                <span class="badge-access restricted">Restricted</span>
                             @endif
                         </div>
                     </div>

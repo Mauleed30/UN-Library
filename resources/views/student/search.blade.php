@@ -24,7 +24,7 @@
                                 <i class="fas fa-search text-primary"></i>
                             </span>
                             <input type="text" name="q" class="form-control"
-                                   placeholder="Search by title, author, or keywords..."
+                                   placeholder="Search by title, author or keywords..."
                                    value="{{ request('q') }}">
                         </div>
                     </div>

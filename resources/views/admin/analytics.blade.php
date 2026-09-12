@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4>📊 Analytics</h4>
+        <h4>Analytics</h4>
         <span class="text-muted" style="font-size: 0.85rem;">
             <i class="far fa-calendar-alt me-1"></i> {{ now()->format('l, d M Y') }}
         </span>
@@ -15,7 +15,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <strong>📋 Submissions by Status</strong>
+                    <strong>Submissions by Status</strong>
                 </div>
                 <div class="card-body">
                     @php
@@ -54,7 +54,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <strong>👥 Users by Role</strong>
+                    <strong>Users by Role</strong>
                 </div>
                 <div class="card-body">
                     @php
@@ -65,19 +65,19 @@
                     @endphp
                     <div class="list-group">
                         <div class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>🎓 Students</span>
+                            <span>Students</span>
                             <span class="badge bg-primary rounded-pill">{{ $students }}</span>
                         </div>
                         <div class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>👨‍🏫 Lecturers</span>
+                            <span>Lecturers</span>
                             <span class="badge bg-warning rounded-pill">{{ $lecturers }}</span>
                         </div>
                         <div class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>📚 Librarians</span>
+                            <span>Librarians</span>
                             <span class="badge bg-info rounded-pill">{{ $librarians }}</span>
                         </div>
                         <div class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>⚙️ Admins</span>
+                            <span>Admins</span>
                             <span class="badge bg-danger rounded-pill">{{ $admins }}</span>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
 
     <div class="card mt-3">
         <div class="card-header">
-            <strong>📊 Monthly Submissions (Last 12 Months)</strong>
+            <strong>Monthly Submissions (Last 12 Months)</strong>
         </div>
         <div class="card-body">
             @php

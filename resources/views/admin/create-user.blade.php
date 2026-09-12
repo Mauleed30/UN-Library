@@ -61,10 +61,10 @@
                         <option value="">Select Role</option>
                         @foreach($roles as $role)
                             <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : '' }}>
-                                @if($role->id == 1) 🎓 Student
-                                @elseif($role->id == 2) 👨‍🏫 Lecturer
-                                @elseif($role->id == 3) 📚 Librarian
-                                @elseif($role->id == 4) ⚙️ Admin
+                                @if($role->id == 1) Student
+                                @elseif($role->id == 2) Lecturer
+                                @elseif($role->id == 3) Librarian
+                                @elseif($role->id == 4) Admin
                                 @endif
                             </option>
                         @endforeach

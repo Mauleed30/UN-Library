@@ -223,8 +223,8 @@
                 <label>Email Address</label>
                 <div class="input-wrapper">
                     <span class="input-icon"><i class="fas fa-envelope"></i></span>
-                    <input type="email" name="email" class="form-control" 
-                           value="{{ old('email') }}" placeholder="you@example.com" required>
+                    <input type="email" name="email" class="form-control"
+                           value="{{ old('email') }}" placeholder="maulid@gmail.com" required>
                 </div>
             </div>
 

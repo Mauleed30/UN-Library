@@ -346,7 +346,7 @@
         <div class="user-info">
             <div class="user-details">
                 <div class="name">{{ auth()->user()->name }}</div>
-                <div class="role">⚙️ Administrator</div>
+                <div class="role"> Administrator</div>
             </div>
             <div class="dropdown">
                 <button class="avatar-dropdown" data-bs-toggle="dropdown">

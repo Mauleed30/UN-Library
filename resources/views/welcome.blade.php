@@ -4,128 +4,139 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>University Repository Management System</title>
+    <title>University Repository</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
-        * {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
+        * { font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
+        body { background: #f5f7fa; }
+
+        /* ====================================================
+           TOP HEADER
+        ==================================================== */
+        .top-header {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b2d45 50%, #1a3a5c 100%);
+            padding: 14px 0 12px;
+            border-bottom: 3px solid #d4a843;
+            position: relative;
         }
-        body {
-            background: #f5f7fa;
+        .top-header::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #d4a843, #f0d080, #d4a843);
         }
 
-        /* Navigation */
-        .navbar-custom {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
-            padding: 12px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        .navbar-custom .navbar-brand {
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: #1a2a3a;
-        }
-        .navbar-custom .navbar-brand i {
-            color: #1a5276;
-        }
-        .nav-link {
-            color: #4a5568 !important;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-            padding: 8px 18px !important;
-        }
-        .nav-link:hover {
-            color: #1a5276 !important;
-        }
-        .nav-btn {
-            background: #1a5276;
-            color: white !important;
-            border-radius: 50px;
-            padding: 8px 25px !important;
-            transition: all 0.3s;
-        }
-        .nav-btn:hover {
-            background: #154360 !important;
-            color: white !important;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(26, 82, 118, 0.3);
-        }
-
-        /* Hero Section */
-        .hero-section {
-            min-height: 100vh;
+        .top-header .header-content {
             display: flex;
             align-items: center;
-            padding: 100px 0 80px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .top-header .left-section { flex: 1; }
+        .top-header .university-name {
+            font-weight: 900;
+            font-size: 1.6rem;
+            color: #ffffff;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            line-height: 1.1;
+        }
+        .top-header .university-name .acronym { color: #d4a843; font-weight: 800; }
+        .top-header .system-name {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .top-header .system-name i { color: #d4a843; margin-right: 6px; }
+
+        .top-header .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .top-header .nav-links .nav-link-custom {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .top-header .nav-links .nav-link-custom:hover {
+            background: rgba(255,255,255,0.1);
+            color: #ffffff;
+        }
+        .top-header .nav-links .nav-link-custom i { margin-right: 8px; color: #d4a843; }
+        .top-header .nav-links .nav-link-custom.btn-register {
+            background: #d4a843;
+            color: #0d1b2a;
+            font-weight: 600;
+            padding: 8px 24px;
+        }
+        .top-header .nav-links .nav-link-custom.btn-register:hover {
+            background: #e8c860;
+            color: #0d1b2a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 168, 67, 0.3);
+        }
+
+        /* ====================================================
+           HERO SECTION
+        ==================================================== */
+        .hero-section {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            padding: 60px 0 40px;
             background: linear-gradient(135deg, #f0f4f8 0%, #dce3ea 50%, #c8d3df 100%);
             position: relative;
             overflow: hidden;
         }
-        /* Decorative elements */
         .hero-section .deco-circle {
             position: absolute;
             border-radius: 50%;
-            background: rgba(26, 82, 118, 0.05);
+            background: rgba(26, 82, 118, 0.04);
             z-index: 0;
         }
-        .deco-circle:nth-child(1) {
-            width: 400px;
-            height: 400px;
-            top: -100px;
-            right: -100px;
-        }
-        .deco-circle:nth-child(2) {
-            width: 250px;
-            height: 250px;
-            bottom: -50px;
-            left: -50px;
-        }
-        .deco-circle:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            top: 20%;
-            left: 40%;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
+        .deco-circle:nth-child(1) { width: 500px; height: 500px; top: -150px; right: -100px; }
+        .deco-circle:nth-child(2) { width: 300px; height: 300px; bottom: -80px; left: -80px; }
 
-        .library-badge {
+        .hero-content { position: relative; z-index: 2; }
+
+        .hero-badge {
             display: inline-block;
-            background: rgba(26, 82, 118, 0.12);
+            background: rgba(26, 82, 118, 0.1);
             color: #1a5276;
             padding: 6px 20px;
             border-radius: 50px;
             font-size: 0.8rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
-            margin-bottom: 20px;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
         }
 
         .hero-title {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 900;
             color: #1a2a3a;
             line-height: 1.1;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
         .hero-title span {
             color: #1a5276;
@@ -138,39 +149,16 @@
             left: 0;
             width: 100%;
             height: 8px;
-            background: rgba(26, 82, 118, 0.15);
+            background: rgba(26, 82, 118, 0.12);
             border-radius: 5px;
         }
+
         .hero-subtitle {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #4a5568;
             line-height: 1.8;
             max-width: 550px;
-            margin-bottom: 30px;
-        }
-
-        /* Library Features - Badges */
-        .library-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 35px;
-        }
-        .library-feature-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: white;
-            padding: 8px 18px;
-            border-radius: 50px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: #1a2a3a;
-        }
-        .library-feature-item i {
-            color: #1a5276;
-            font-size: 0.9rem;
+            margin-bottom: 25px;
         }
 
         .btn-primary-custom {
@@ -190,6 +178,7 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(26, 82, 118, 0.3);
         }
+
         .btn-outline-custom {
             background: transparent;
             color: #1a5276;
@@ -208,7 +197,6 @@
             transform: translateY(-3px);
         }
 
-        /* Right Side - Library Illustration */
         .hero-illustration {
             position: relative;
             z-index: 2;
@@ -219,23 +207,23 @@
             background: white;
             border-radius: 24px;
             padding: 40px 50px;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.08);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.06);
             position: relative;
         }
         .hero-illustration .icon-box i {
-            font-size: 6rem;
+            font-size: 5rem;
             color: #1a5276;
             opacity: 0.9;
         }
         .hero-illustration .icon-box .label {
-            margin-top: 15px;
+            margin-top: 12px;
             font-weight: 600;
             color: #1a2a3a;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
         .hero-illustration .icon-box .sub-label {
             color: #6b7a8f;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .floating-badge {
@@ -243,27 +231,15 @@
             background: white;
             border-radius: 16px;
             padding: 12px 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
             display: flex;
             align-items: center;
             gap: 12px;
             animation: float 3s ease-in-out infinite;
         }
-        .floating-badge:nth-child(2) {
-            top: 5%;
-            right: -5%;
-            animation-delay: 0s;
-        }
-        .floating-badge:nth-child(3) {
-            bottom: 15%;
-            left: -10%;
-            animation-delay: 1.5s;
-        }
-        .floating-badge:nth-child(4) {
-            top: 45%;
-            right: -8%;
-            animation-delay: 0.8s;
-        }
+        .floating-badge:nth-child(2) { top: 5%; right: -5%; animation-delay: 0s; }
+        .floating-badge:nth-child(3) { bottom: 15%; left: -10%; animation-delay: 1.5s; }
+        .floating-badge:nth-child(4) { top: 45%; right: -8%; animation-delay: 0.8s; }
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-12px); }
@@ -271,7 +247,7 @@
         .floating-badge .icon {
             width: 38px;
             height: 38px;
-            background: rgba(26, 82, 118, 0.1);
+            background: rgba(26, 82, 118, 0.08);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -289,144 +265,138 @@
             font-size: 0.7rem;
         }
 
-        /* Stats Section */
+        /* ====================================================
+           STATS SECTION
+        ==================================================== */
         .stats-section {
             background: white;
-            padding: 60px 0;
+            padding: 40px 0;
             border-top: 1px solid #eef2f7;
         }
-        .stat-item {
-            text-align: center;
-        }
+        .stat-item { text-align: center; }
         .stat-item .number {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             font-weight: 800;
             color: #1a5276;
         }
         .stat-item .label {
             color: #6b7a8f;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
         }
 
-        /* Footer */
+        /* ====================================================
+           FOOTER
+        ==================================================== */
         .footer {
             background: #1a2a3a;
             color: rgba(255,255,255,0.7);
-            padding: 40px 0;
+            padding: 30px 0;
         }
         .footer a {
             color: rgba(255,255,255,0.7);
             text-decoration: none;
             transition: color 0.3s;
         }
-        .footer a:hover {
-            color: white;
-        }
+        .footer a:hover { color: white; }
         .footer .footer-brand {
             font-size: 1.2rem;
             font-weight: 700;
             color: white;
         }
-        .footer .footer-brand i {
-            color: #6ab0e6;
+        .footer .footer-brand i { color: #d4a843; }
+
+        /* ====================================================
+           RESPONSIVE
+        ==================================================== */
+        @media (max-width: 992px) {
+            .hero-title { font-size: 2.8rem; }
+            .top-header .university-name { font-size: 1.3rem; }
+            .top-header .nav-links .nav-link-custom { font-size: 0.75rem; padding: 6px 14px; }
+            .floating-badge { display: none !important; }
         }
 
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero-title {
-                font-size: 2.8rem;
-            }
-            .floating-badge {
-                display: none !important;
-            }
-            .hero-section {
-                padding: 80px 0 60px;
-            }
-            .hero-illustration .icon-box {
-                padding: 30px 40px;
-            }
-            .hero-illustration .icon-box i {
-                font-size: 4rem;
-            }
-        }
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            .btn-outline-custom {
-                margin-left: 0;
-                margin-top: 10px;
-            }
-            .library-features {
-                gap: 8px;
-            }
-            .library-feature-item {
-                padding: 6px 14px;
-                font-size: 0.75rem;
-            }
+            .top-header .header-content { flex-direction: column; align-items: center; text-align: center; }
+            .top-header .university-name { font-size: 1.1rem; }
+            .top-header .system-name { font-size: 0.55rem; }
+            .top-header .nav-links .nav-link-custom { font-size: 0.7rem; padding: 5px 12px; }
+            .hero-title { font-size: 2.2rem; }
+            .btn-outline-custom { margin-left: 0; margin-top: 10px; }
+            .hero-subtitle { max-width: 100%; }
+            .hero-illustration .icon-box { padding: 30px 35px; }
+            .hero-illustration .icon-box i { font-size: 3.5rem; }
+            .stat-item .number { font-size: 2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .top-header { padding: 8px 0 6px; }
+            .top-header .university-name { font-size: 0.9rem; }
+            .top-header .system-name { font-size: 0.45rem; }
+            .top-header .nav-links .nav-link-custom { font-size: 0.6rem; padding: 4px 10px; }
+            .hero-title { font-size: 1.8rem; }
+            .hero-section { min-height: 60vh; padding: 40px 0; }
+            .hero-illustration .icon-box { padding: 20px 25px; }
+            .hero-illustration .icon-box i { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-custom">
+    <!-- ====================================================
+    TOP HEADER
+    ==================================================== -->
+    <header class="top-header">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                <i class="fas fa-university me-2"></i> UniRepository
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-lg-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('guest.catalogue') }}"><i class="fas fa-book me-1"></i> Catalogue</a>
-                    </li>
+            <div class="header-content">
+                <div class="left-section">
+                    <div class="university-name">
+                        UNIVERSITY <span class="acronym">REPOSITORY</span>
+                    </div>
+                    <div class="system-name">
+                        <i class="fas fa-graduation-cap"></i> ACADEMIC REPOSITORY SYSTEM
+                    </div>
+                </div>
+
+                <div class="nav-links">
+                    <a href="{{ route('guest.catalogue') }}" class="nav-link-custom">
+                        <i class="fas fa-book"></i> Catalogue
+                    </a>
                     @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('student.dashboard') }}"><i class="fas fa-chart-pie me-1"></i> Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt me-1"></i> Logout
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
-                                @csrf
-                            </form>
-                        </li>
+
+                        <a href="#" class="nav-link-custom" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">@csrf</form>
                     @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}"><i class="fas fa-sign-in-alt me-1"></i> Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-btn" href="{{ route('register') }}">
-                                <i class="fas fa-user-plus me-1"></i> Register
-                            </a>
-                        </li>
+                        <a href="{{ route('login') }}" class="nav-link-custom">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                        <a href="{{ route('register') }}" class="nav-link-custom btn-register">
+                            <i class="fas fa-user-plus"></i> Register
+                        </a>
                     @endauth
-                </ul>
+                </div>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
+    <!-- ====================================================
+    HERO SECTION
+    ==================================================== -->
     <section class="hero-section">
-        <!-- Decorative Circles -->
-        <div class="deco-circle"></div>
         <div class="deco-circle"></div>
         <div class="deco-circle"></div>
 
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-7 hero-content">
-                    <div class="library-badge">
+                    <div class="hero-badge">
                         <i class="fas fa-graduation-cap me-2"></i> UNIVERSITY LIBRARY
                     </div>
                     <h1 class="hero-title">
-                        University Repository <br>
-                        <span>Management System</span>
+                        University <span>Repository</span> <br>
+                        Management System
                     </h1>
                     <p class="hero-subtitle">
                         A comprehensive platform for managing academic submissions, theses, dissertations
@@ -455,18 +425,17 @@
                         <div class="label">University Library</div>
                         <div class="sub-label">Digital Repository</div>
 
-                        <!-- Floating Badges -->
                         <div class="floating-badge">
                             <div class="icon"><i class="fas fa-file-pdf"></i></div>
                             <div class="info">
-                                <strong>5</strong>
+                                <strong>6</strong>
                                 <span>Submissions</span>
                             </div>
                         </div>
                         <div class="floating-badge">
                             <div class="icon"><i class="fas fa-users"></i></div>
                             <div class="info">
-                                <strong>3</strong>
+                                <strong>8</strong>
                                 <span>Active Users</span>
                             </div>
                         </div>
@@ -474,7 +443,7 @@
                             <div class="icon"><i class="fas fa-book-open"></i></div>
                             <div class="info">
                                 <strong>9</strong>
-                                <span>Resources</span>
+                                <span>Categories</span>
                             </div>
                         </div>
                     </div>
@@ -483,31 +452,40 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
+    <!-- ====================================================
+    STATS SECTION
+    ==================================================== -->
     <section class="stats-section">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 stat-item">
-                    <div class="number">5</div>
-                    <div class="label">📝 Total Submissions</div>
+                @php
+                    $published = \App\Models\Submission::where('status', 'published')->count();
+                    $users = \App\Models\User::count();
+                    $categories = \App\Models\Category::count();
+                @endphp
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="number">{{ $published }}</div>
+                    <div class="label">Published Works</div>
                 </div>
-                <div class="col-md-3 stat-item">
-                    <div class="number">3</div>
-                    <div class="label">👥 Active Users</div>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="number">{{ $users }}</div>
+                    <div class="label">Active Users</div>
                 </div>
-                <div class="col-md-3 stat-item">
-                    <div class="number">9</div>
-                    <div class="label">📚 Resources Available</div>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="number">{{ $categories }}</div>
+                    <div class="label">Categories</div>
                 </div>
-                <div class="col-md-3 stat-item">
-                    <div class="number">90%</div>
-                    <div class="label">⭐ Satisfaction Rate</div>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="number">98%</div>
+                    <div class="label">Satisfaction</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ====================================================
+    FOOTER
+    ==================================================== -->
     <footer class="footer">
         <div class="container">
             <div class="row align-items-center">
@@ -528,7 +506,6 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

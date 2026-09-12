@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ResetPasswordMail;
-use Illuminate\Support\Str;
 
 class PasswordResetLinkController extends Controller
 {
@@ -26,7 +25,6 @@ class PasswordResetLinkController extends Controller
             $request->only('email')
         );
 
-        // Send custom email
         if ($status === Password::RESET_LINK_SENT) {
             $token = \DB::table('password_reset_tokens')->where('email', $request->email)->first();
             if ($token) {

@@ -57,7 +57,7 @@
 <div class="container-fluid">
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4>📊 Admin Dashboard</h4>
+        <h4>Admin Dashboard</h4>
         <span class="text-muted" style="font-size: 0.85rem;">
             <i class="far fa-calendar-alt me-1"></i> {{ now()->format('l, d M Y') }}
         </span>

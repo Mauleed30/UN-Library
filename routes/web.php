@@ -213,3 +213,41 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::delete('/backups/{filename}', [App\Http\Controllers\AdminController::class, 'deleteBackup'])->name('admin.backups.delete');
     Route::get('/settings', [App\Http\Controllers\AdminController::class, 'settings'])->name('admin.settings');
 });
+// ==================== LIBRARIAN ROUTES ====================
+Route::middleware(['auth', 'role:librarian'])->prefix('librarian')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\LibrarianController::class, 'dashboard'])->name('librarian.dashboard');
+    Route::get('/submissions', [App\Http\Controllers\LibrarianController::class, 'submissions'])->name('librarian.submissions');
+    Route::get('/review/{id}', [App\Http\Controllers\LibrarianController::class, 'review'])->name('librarian.review');
+    Route::post('/approve/{id}', [App\Http\Controllers\LibrarianController::class, 'approve'])->name('librarian.approve');
+    Route::post('/reject/{id}', [App\Http\Controllers\LibrarianController::class, 'reject'])->name('librarian.reject');
+    Route::get('/publish/{id}', [App\Http\Controllers\LibrarianController::class, 'publish'])->name('librarian.publish');
+    Route::get('/edit-metadata/{id}', [App\Http\Controllers\LibrarianController::class, 'editMetadata'])->name('librarian.edit-metadata');
+    Route::post('/update-metadata/{id}', [App\Http\Controllers\LibrarianController::class, 'updateMetadata'])->name('librarian.metadata.update');
+    Route::get('/categories', [App\Http\Controllers\LibrarianController::class, 'categories'])->name('librarian.categories');
+    Route::post('/categories', [App\Http\Controllers\LibrarianController::class, 'storeCategory'])->name('librarian.categories.store');
+    Route::delete('/categories/{id}', [App\Http\Controllers\LibrarianController::class, 'deleteCategory'])->name('librarian.categories.delete');
+    Route::post('/set-access/{id}', [App\Http\Controllers\LibrarianController::class, 'setAccessLevel'])->name('librarian.set-access');
+    Route::get('/stats', [App\Http\Controllers\LibrarianController::class, 'stats'])->name('librarian.stats');
+    Route::get('/quick', [App\Http\Controllers\LibrarianController::class, 'quick'])->name('librarian.quick');
+    Route::get('/access', [App\Http\Controllers\LibrarianController::class, 'access'])->name('librarian.access');
+    Route::get('/activity', [App\Http\Controllers\LibrarianController::class, 'activity'])->name('librarian.activity');
+});
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\NewPasswordController;
+
+// ==================== PASSWORD RESET ROUTES ====================
+Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
+    ->middleware('guest')
+    ->name('password.request');
+
+Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
+    ->middleware('guest')
+    ->name('password.email');
+
+Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
+    ->middleware('guest')
+    ->name('password.reset');
+
+Route::post('/reset-password', [NewPasswordController::class, 'store'])
+    ->middleware('guest')
+    ->name('password.update');

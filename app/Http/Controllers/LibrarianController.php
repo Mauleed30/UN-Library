@@ -17,19 +17,7 @@ class LibrarianController extends Controller
 
     public function dashboard()
     {
-        $pendingReview = Submission::where('status', 'reviewed')->count();
-        $approved = Submission::where('status', 'approved')->count();
-        $rejected = Submission::where('status', 'rejected')->count();
-        $published = Submission::where('status', 'published')->count();
-        $total = Submission::count();
-        $openAccess = Submission::where('is_open_source', true)->count();
-        $restricted = Submission::where('is_open_source', false)->count();
-        $submissions = Submission::where('status', 'reviewed')->latest()->take(5)->get();
-
-        return view('librarian.dashboard', compact(
-            'pendingReview', 'approved', 'rejected', 'published', 'total',
-            'openAccess', 'restricted', 'submissions'
-        ));
+        return view('librarian.dashboard');
     }
 
     public function submissions(Request $request)
@@ -62,7 +50,7 @@ class LibrarianController extends Controller
         $submission->reviewed_at = now();
         $submission->save();
 
-        return redirect()->route('librarian.dashboard')->with('success', '✅ Submission approved successfully!');
+        return redirect()->route('librarian.submissions')->with('success', '✅ Submission approved successfully!');
     }
 
     public function reject(Request $request, $id)
@@ -74,7 +62,7 @@ class LibrarianController extends Controller
         $submission->reviewed_at = now();
         $submission->save();
 
-        return redirect()->route('librarian.dashboard')->with('error', '❌ Submission rejected.');
+        return redirect()->route('librarian.submissions')->with('error', '❌ Submission rejected.');
     }
 
     public function publish($id)
@@ -84,7 +72,7 @@ class LibrarianController extends Controller
         $submission->published_at = now();
         $submission->save();
 
-        return redirect()->route('librarian.dashboard')->with('success', '📚 Submission published successfully!');
+        return redirect()->route('librarian.submissions')->with('success', '📚 Submission published successfully!');
     }
 
     public function editMetadata($id)
@@ -97,7 +85,6 @@ class LibrarianController extends Controller
     public function updateMetadata(Request $request, $id)
     {
         $submission = Submission::findOrFail($id);
-
         $request->validate([
             'title' => 'required|string|max:255',
             'abstract' => 'required|string',
@@ -113,7 +100,7 @@ class LibrarianController extends Controller
             'is_open_source' => $request->has('is_open_source'),
         ]);
 
-        return redirect()->route('librarian.dashboard')->with('success', '✅ Metadata updated successfully!');
+        return redirect()->route('librarian.submissions')->with('success', '✅ Metadata updated!');
     }
 
     public function categories()
@@ -149,17 +136,7 @@ class LibrarianController extends Controller
 
     public function stats()
     {
-        $total = Submission::count();
-        $pendingReview = Submission::where('status', 'reviewed')->count();
-        $approved = Submission::where('status', 'approved')->count();
-        $rejected = Submission::where('status', 'rejected')->count();
-        $published = Submission::where('status', 'published')->count();
-        $openAccess = Submission::where('is_open_source', true)->count();
-        $restricted = Submission::where('is_open_source', false)->count();
-        $monthlyData = Submission::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, count(*) as total')
-            ->groupBy('month')->orderBy('month', 'desc')->take(12)->get();
-
-        return view('librarian.stats', compact('total', 'pendingReview', 'approved', 'rejected', 'published', 'openAccess', 'restricted', 'monthlyData'));
+        return view('librarian.stats');
     }
 
     public function quick()
@@ -171,5 +148,11 @@ class LibrarianController extends Controller
     {
         $submissions = Submission::where('status', 'approved')->orWhere('status', 'published')->get();
         return view('librarian.access', compact('submissions'));
+    }
+
+    public function activity()
+    {
+        $activities = Submission::whereNotNull('reviewed_at')->latest('reviewed_at')->paginate(15);
+        return view('librarian.activity', compact('activities'));
     }
 }

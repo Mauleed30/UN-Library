@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4>👥 Manage Users</h4>
+        <h4> Manage Users</h4>
         <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm">
             <i class="fas fa-plus me-1"></i> Add User
         </a>
@@ -47,13 +47,13 @@
                                 <td>{{ $user->username ?? 'N/A' }}</td>
                                 <td>
                                     @if($user->role_id == 1)
-                                        <span class="badge bg-primary">🎓 Student</span>
+                                        <span class="badge bg-primary"> Student</span>
                                     @elseif($user->role_id == 2)
-                                        <span class="badge bg-warning">👨‍🏫 Lecturer</span>
+                                        <span class="badge bg-warning"> Lecturer</span>
                                     @elseif($user->role_id == 3)
-                                        <span class="badge bg-info">📚 Librarian</span>
+                                        <span class="badge bg-info"> Librarian</span>
                                     @elseif($user->role_id == 4)
-                                        <span class="badge bg-danger">⚙️ Admin</span>
+                                        <span class="badge bg-danger"> Admin</span>
                                     @else
                                         <span class="badge bg-secondary">N/A</span>
                                     @endif

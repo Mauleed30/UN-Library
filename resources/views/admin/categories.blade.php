@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4>📂 Manage Categories</h4>
+        <h4>Manage Categories</h4>
         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
             <i class="fas fa-plus me-1"></i> Add Category
         </button>
