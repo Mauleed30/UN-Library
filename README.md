@@ -1,6 +1,6 @@
 # UN-Library - University Repository Management System
 
-A comprehensive platform for managing academic submissions, theses, dissertations, and research papers.
+A comprehensive platform for managing academic submissions, theses, dissertations and research papers.
 
 ## ✨ Features
 
